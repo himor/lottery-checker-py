@@ -1,9 +1,11 @@
 import datetime
-class Logger:
+"""
+experinmenting with logger
+"""
+class Logger(object):
     TYPE_SCREEN = 1
     TYPE_FILE   = 2
 
-    filename = ""
     type = TYPE_SCREEN
     prefix = ""
 
@@ -26,11 +28,14 @@ class Logger:
 
     def log(self, message):
         micro = int(datetime.datetime.now().__format__("%f")) / 100
-        prefix = "[" + datetime.datetime.now().__format__("%Y-%m-%d %H:%M:%S.") + str(micro) + "] "
+        prefix = '[{}.{}]'.format(datetime.datetime.now().__format__("%Y-%m-%d %H:%M:%S"), micro)
         prefix = prefix + self.prefix
         if self.type & self.TYPE_SCREEN:
             print prefix + message
         if self.type & self.TYPE_FILE:
-            f = open (self.filename, "a+")
-            f.write(prefix + message + "\n")
+            with open(self.filename, "a+") as logfile:
+                try:
+                    logfile.write(prefix + message + "\n")
+                finally:
+                    logfile.close()
 

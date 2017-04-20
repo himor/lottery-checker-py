@@ -1,6 +1,8 @@
-import logger, datetime
+import logging
+import logging.config
+import datetime
+import sys
 
-log = logger.Logger("log.txt")
-log.setType(log.TYPE_FILE + log.TYPE_SCREEN)
-log.log("hello " + datetime.datetime.today().__str__())
-
+logging.config.fileConfig('logging.ini')
+logger = logging.getLogger(__name__)
+logger.warning("hello " + datetime.datetime.today().__str__())
