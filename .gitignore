@@ -1,3 +1,5 @@
 *.log
 *.pyc
 tests/__pycache__
+__pycache__
+.cache
