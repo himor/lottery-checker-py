@@ -3,6 +3,7 @@ import logging.config
 import datetime
 import lottery
 import rangea
+import freqa
 from bcolors import bcolors
 
 # setting up logging
