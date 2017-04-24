@@ -1,6 +1,7 @@
 import unittest
 import rangea
 import freqa
+import builder
 
 class TestApp(unittest.TestCase):
     def test_range(self):
@@ -39,4 +40,15 @@ class TestApp(unittest.TestCase):
 
         res = set(fa.check([5, 7, 25, 45, 75]))
         self.assertEqual(set([0, 1, 2, 3, 4]), res, "Range Check failed - incorrect subset " + str(res))
-        
+
+    def test_builder(self):
+        b = builder.Builder()
+        b.populate()
+
+        self.assertEqual(len(b.numbers), 5, "Generated incorrect sequence")
+
+        seq = b.get_numbers_string()
+        text_seq = seq.split(" ")
+
+        self.assertEqual(len(text_seq), 6, "Generated incorrect sequence with megaball")
+
