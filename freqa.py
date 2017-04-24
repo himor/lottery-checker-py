@@ -1,31 +1,33 @@
 
+import os
 class FrequencyAnalyser(object):
 
     def analyse(self, data):
-        numbers = [[0 for __ in range(0, 76)] for __ in range(0, 6)]
+        numbers = [[0 for __ in range(0, 6)] for __ in range(0, 76)]
         mballs = [0 for __ in range(0, 16)]
 
         for item in data:
             for pos, num in enumerate(item['numbers']):
-                numbers[pos+1][num] += 1
+                numbers[num][pos+1] += 1
             mballs[item['mega']] += 1
 
         maximum = float(len(data))
         for i, j in enumerate(numbers):
             for pos in range(0, len(j)):
-                numbers[i][pos] /= maximum * 100.0
+                numbers[i][pos] = numbers[i][pos] / maximum * 100.0
 
         for i in range(0, len(mballs)):
-            mballs[i] /= maximum * 100.0
+            mballs[i] = mballs[i] / maximum * 100.0
 
         self.cache = {'numbers': numbers, 'mb': mballs}
+        return self.cache
 
     def check(self, set):
         normal = []
         for pos, number in enumerate(set):
             pos += 1
-            tempset = self.cache['numbers'][pos]
-            right = float(tempset[number])
+            tempset = self.cache['numbers'][number]
+            right = float(tempset[pos])
             for qq in tempset:
                 if qq > right:
                     normal.append(pos - 1)

@@ -33,13 +33,13 @@ class TestApp(unittest.TestCase):
         self.assertEqual([], res, "Range Check failed - should be empty set " + str(res))
 
         res = set(fa.check([5, 20, 30, 40, 60]))
-        self.assertEqual(set([0]), res, "Range Check failed - incorrect subset " + str(res))
+        self.assertEqual(set([]), res, "Range Check failed - incorrect subset " + str(res))
 
         res = set(fa.check([1, 10, 20, 40, 60]))
-        self.assertEqual(set([1, 2]), res, "Range Check failed - incorrect subset " + str(res))
+        self.assertEqual(set([2]), res, "Range Check failed - incorrect subset " + str(res))
 
-        res = set(fa.check([5, 7, 25, 45, 75]))
-        self.assertEqual(set([0, 1, 2, 3, 4]), res, "Range Check failed - incorrect subset " + str(res))
+        res = set(fa.check([5, 7, 10, 45, 75]))
+        self.assertEqual(set([2]), res, "Range Check failed - incorrect subset " + str(res))
 
     def test_builder(self):
         b = builder.Builder()

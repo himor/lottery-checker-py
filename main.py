@@ -4,6 +4,7 @@ import datetime
 import lottery
 import rangea
 import freqa
+import builder
 from bcolors import bcolors
 
 # setting up logging
@@ -16,8 +17,29 @@ lottery = lottery.Lottery()
 lottery.fetch()
 logger.info("Fetched {} sets".format(len(lottery.data)))
 
+# display fetched data
+freq = freqa.FrequencyAnalyser()
+freqRes = freq.analyse(lottery.data)
+
 for i in range (0,5):
-    print(bcolors.OKBLUE + lottery.data[i]['date'] + bcolors.ENDC + " {num} ({mega})".format(
-        num = " ".join(map(str, lottery.data[i]['numbers'])),
-        mega = lottery.data[i]['mega'],
-        ))
+    print("{}\t".format(lottery.data[i]['date'])),
+    err = freq.check(lottery.data[i]['numbers'])
+
+    if len(err) > 0:
+        print(bcolors.FAIL + "freq: fail" + bcolors.ENDC)
+    else:
+        print(bcolors.OKGREEN + "freq: pass" + bcolors.ENDC)
+
+    for pos, value in enumerate(lottery.data[i]['numbers']):
+        if pos in err:
+            print(bcolors.FAIL + "{}\t".format(value) + bcolors.ENDC),
+        else:
+            print(bcolors.OKGREEN + "{}\t".format(value) + bcolors.ENDC),
+        
+        for k in range(1, 6):
+            print("%.3f\t" % freqRes['numbers'][value][k]),
+
+        print
+
+    print("mega %2d (%.2f)\n" % (lottery.data[i]['mega'], freqRes['mb'][lottery.data[i]['mega']]))
+
