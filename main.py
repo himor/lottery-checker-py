@@ -21,7 +21,3 @@ for i in range (0,5):
         num = " ".join(map(str, lottery.data[i]['numbers'])),
         mega = lottery.data[i]['mega'],
         ))
-
-ra = rangea.RangeAnalyser()
-ra.analyse(lottery.data)
-print(ra.check([1,2,69,70,71]))
