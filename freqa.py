@@ -1,5 +1,3 @@
-
-import os
 class FrequencyAnalyser(object):
 
     def analyse(self, data):

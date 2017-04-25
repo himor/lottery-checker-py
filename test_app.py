@@ -1,6 +1,7 @@
 import unittest
 import rangea
 import freqa
+import dista
 import builder
 
 class TestApp(unittest.TestCase):

@@ -4,6 +4,7 @@ import datetime
 import lottery
 import rangea
 import freqa
+import dista
 import builder
 from bcolors import bcolors
 

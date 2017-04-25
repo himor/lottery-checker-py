@@ -11,15 +11,15 @@ class Lottery(object):
     def fetch(self):
         try:
             content = urllib.urlopen(self.url)
-        except IOError as e:
-            logging.error(e)
+        except IOError as exception:
+            logging.error(exception)
             return
 
         try:
             data = json.loads(content.read())
             self.convert(data)
-        except ValueError as e:
-            logging.error(e)
+        except ValueError as exception:
+            logging.error(exception)
             return
 
     def convert(self, data):
